@@ -1,4 +1,6 @@
-on: [push]
+name: tfsec-pr-commenter
+on:
+  pull_request:
 
 jobs:
   hello_world_job:
