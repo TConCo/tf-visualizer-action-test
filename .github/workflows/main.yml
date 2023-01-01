@@ -1,4 +1,4 @@
-name: tfsec-pr-commenter
+name: tf-visualizer-action-test
 on:
   pull_request:
 
