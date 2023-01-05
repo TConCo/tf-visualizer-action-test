@@ -7,12 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
+      - name: pull_request
+        run: echo ${{github.event.pull_request}}
       - name: Hello world action step
         id: hello
         uses: fatihtokus/tf-visualizer-action@v0.0.13
         with:
           pull-request: ${{github.event.pull_request.number}}
           github-token: ${{ github.token }}
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo ${{github.event.pull_request}}
