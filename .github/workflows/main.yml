@@ -5,6 +5,9 @@ on:
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     name: A job to say hello
     steps:
       - name: pull_request
