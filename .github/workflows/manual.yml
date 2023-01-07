@@ -47,7 +47,7 @@ jobs:
       - name: step2
         run: echo "test2=hello2" >> $GITHUB_OUTPUT
       - name: outputtest
-        run: echo ${{steps.step2.outputs.test}}
+        run: echo ${{steps.step2.outputs.test2}}
       - name: outputtest2
         run: echo ${{steps.tfsec.outputs.results}}
       - name: outputtest3
