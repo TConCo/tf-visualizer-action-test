@@ -8,12 +8,9 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
+      pull_request:
+        description: 'Pull request url'
+        default: 'https://api.github.com/repos/fatihtokus/tf-visualizer-action-test/pulls/2'
         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -27,4 +24,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      run: echo "Hello ${{ github.event.inputs.pull_request }}"
