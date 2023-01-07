@@ -29,7 +29,6 @@ jobs:
   tfsec:
     name: tfsec PR commenter
     runs-on: ubuntu-latest
-    # Map a step output to a job output
     outputs:
       output1: ${{ steps.tfsec.outputs.test }}
 
@@ -44,4 +43,4 @@ jobs:
           tfsec_formats: sarif,csv
          
       - name: outputtest
-        run: echo ${{tfsec.outputs.output1}}
+        run: echo ${{steps.tfsec.outputs}}
