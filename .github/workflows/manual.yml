@@ -25,3 +25,23 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.pull_request }}"
+      
+  tfsec:
+    name: tfsec PR commenter
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      output1: ${{ steps.tfsec.outputs.test }}
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: tfsec
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
+        with:
+          tfsec_args: --soft-fail
+          github_token: ${{ github.token }}
+          tfsec_formats: sarif,csv
+         
+      - name: outputtest
+        run: echo ${{tfsec.outputs.output1}}
