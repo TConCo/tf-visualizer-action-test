@@ -43,4 +43,4 @@ jobs:
           tfsec_formats: sarif,csv
          
       - name: outputtest
-        run: echo ${{steps.tfsec.outputs}}
+        run: echo ${{steps.tfsec.outputs.results}}
