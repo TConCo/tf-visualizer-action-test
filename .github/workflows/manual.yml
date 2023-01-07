@@ -40,10 +40,13 @@ jobs:
         with:
           tfsec_args: --soft-fail
           github_token: ${{ github.token }}
-          tfsec_formats: sarif,csv
          
       - name: outputtest
         run: echo ${{steps.tfsec.outputs.results.json}}
+      - name: outputtest2
+        run: echo ${{steps.tfsec.outputs.results}}
+      - name: outputtest3
+        run: echo ${{steps.tfsec.outputs.out}}
       - name: Print the final result
         shell: bash
         run: |
