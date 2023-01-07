@@ -41,11 +41,11 @@ jobs:
           tfsec_args: --soft-fail
           github_token: ${{ github.token }}
       - id: step1
-        run: echo "test=hello" >> $GITHUB_OUTPUT
+        run: echo "test=hello1" >> $GITHUB_OUTPUT
       - name: outputtest
         run: echo ${{steps.step1.outputs.test}}
       - name: step2
-        run: echo "test2=hello" >> $GITHUB_OUTPUT
+        run: echo "test2=hello2" >> $GITHUB_OUTPUT
       - name: outputtest
         run: echo ${{steps.step2.outputs.test}}
       - name: outputtest2
