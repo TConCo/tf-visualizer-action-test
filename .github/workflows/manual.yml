@@ -57,3 +57,13 @@ jobs:
         run: |
           value=`cat ${{steps.tfsec.outputs.results}}`
           echo The result is $value
+      - name: Print the final result 3
+        shell: bash
+        run: |
+          value=`cat ${{steps.tfsec.outputs.TFSEC_OUT_OPTION}}`
+          echo The result is $value
+       - name: Print the final result 4
+        shell: bash
+        run: |
+          value=`cat ${{steps.tfsec.outputs}}`
+          echo The result is $value
