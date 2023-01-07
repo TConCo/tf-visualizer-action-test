@@ -44,3 +44,13 @@ jobs:
          
       - name: outputtest
         run: echo ${{steps.tfsec.outputs.results.json}}
+      - name: Print the final result
+        shell: bash
+        run: |
+          value=`cat ${{steps.tfsec.outputs.results.json}}`
+          echo The result is $value
+      - name: Print the final result 2
+        shell: bash
+        run: |
+          value=`cat ${{steps.tfsec.outputs.results}}`
+          echo The result is $value
