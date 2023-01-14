@@ -19,7 +19,7 @@ jobs:
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
           
-      - name: outputtest2
+      - name: outputtest1
         if: always()
         run: |
           echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n" >> $GITHUB_OUTPUT
