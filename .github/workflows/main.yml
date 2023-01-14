@@ -12,11 +12,14 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: tfsec
+        id: tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
           working_directory: ''
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
+      - name: outputtest2
+        run: echo ${{join(steps.tfsec.outputs.*, '\n')}}
 #   create_issue:
 #     runs-on: ubuntu-latest
 #     permissions:
