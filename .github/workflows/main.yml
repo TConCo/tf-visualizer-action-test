@@ -30,6 +30,11 @@ jobs:
         run: |
           value=`cat results.json`
           echo The result is $value
+      - name: Download math result for job 2
+        if: always()
+        uses: actions/download-artifact@v3
+        with:
+          name: tf_results
       - name: outputtest1
         if: always()
         run: |
