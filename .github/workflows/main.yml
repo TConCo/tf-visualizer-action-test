@@ -22,7 +22,7 @@ jobs:
       - name: outputtest1
         if: always()
         run: |
-          echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n" >> $GITHUB_OUTPUT
+          echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" >> $GITHUB_OUTPUT
           echo "BBBBB" >> $GITHUB_OUTPUT
         id: run_tests
       - name: outputtest2
