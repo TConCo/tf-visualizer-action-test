@@ -18,11 +18,10 @@ jobs:
           working_directory: ''
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
-      - run: |
-          ls
       - name: outputtest1
         if: always()
         run: |
+          ls
           echo "mix-ecto_create='ABC'" >> $GITHUB_OUTPUT
         id: run_tests
       - name: outputtest2
