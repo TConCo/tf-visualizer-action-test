@@ -12,39 +12,39 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: tfsec
-        uses: aquasecurity/tfsec-pr-commenter-action@main
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
           working_directory: ''
           tfsec_args: --soft-fail
           github_token: ${{ github.token }}
-  create_issue:
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write 
-    steps:
-      - name: Create issue using REST API
-        run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/issues \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "title": "Automated issue for commit: ${{ github.sha }}",
-            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
-            }' \
-          --fail
-  hello_world_job:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    name: A job to say hello
-    steps:
-      - name: pull_request
-        run: echo ${{github.event.pull_request.url}}
-      - name: Hello world action step
-        id: hello
-        uses: fatihtokus/tf-visualizer-action@v0.0.15
-        with:
-          pull-request: ${{github.event.pull_request.url}}
-          github-token: ${{ github.token }}
+#   create_issue:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       issues: write 
+#     steps:
+#       - name: Create issue using REST API
+#         run: |
+#           curl --request POST \
+#           --url https://api.github.com/repos/${{ github.repository }}/issues \
+#           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+#           --header 'content-type: application/json' \
+#           --data '{
+#             "title": "Automated issue for commit: ${{ github.sha }}",
+#             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+#             }' \
+#           --fail
+#   hello_world_job:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       pull-requests: write
+#     name: A job to say hello
+#     steps:
+#       - name: pull_request
+#         run: echo ${{github.event.pull_request.url}}
+#       - name: Hello world action step
+#         id: hello
+#         uses: fatihtokus/tf-visualizer-action@v0.0.15
+#         with:
+#           pull-request: ${{github.event.pull_request.url}}
+#           github-token: ${{ github.token }}
