@@ -13,7 +13,7 @@ resource "aws_security_group_rule" "my-rule2" {
     cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-vpc-no-public-ingress-sgr:exp:2023-01-13
 }
 
-resource "aws_s3_bucket" "my-bucket1" {
+resource "aws_s3_bucket" "my-bucket" {
   bucket = "foobar"
   acl    = "private"
 }
