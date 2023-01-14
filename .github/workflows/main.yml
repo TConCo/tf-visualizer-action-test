@@ -22,8 +22,7 @@ jobs:
       - name: outputtest1
         if: always()
         run: |
-          echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" >> $GITHUB_OUTPUT
-          echo "BBBBB" >> $GITHUB_OUTPUT
+          echo "mix-ecto_create='ABC'" >> $GITHUB_OUTPUT
         id: run_tests
       - name: outputtest2
         if: always()
