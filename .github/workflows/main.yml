@@ -19,6 +19,7 @@ jobs:
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
       - name: outputtest2
+        if: always()
         run: echo ${{join(steps.tfsec.outputs.*, '\n')}}
 #   create_issue:
 #     runs-on: ubuntu-latest
