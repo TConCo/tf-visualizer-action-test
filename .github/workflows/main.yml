@@ -18,9 +18,18 @@ jobs:
           working_directory: ''
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
+          
       - name: outputtest2
         if: always()
-        run: echo ${{join(steps.tfsec.outputs.results.json, '\n')}}
+        run: |
+          echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n" >> $GITHUB_OUTPUT
+          echo "BBBBB" >> $GITHUB_OUTPUT
+        id: run_tests
+      - name: outputtest2
+        if: always()
+        run: |
+          echo ${{join(steps.run_tests.outputs.*, '\n')}}
+          echo ${{join(steps.tfsec.outputs.*, '\n')}}
 #   create_issue:
 #     runs-on: ubuntu-latest
 #     permissions:
