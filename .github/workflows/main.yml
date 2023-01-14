@@ -18,6 +18,18 @@ jobs:
           working_directory: ''
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
+      - name: Upload math result for job 1
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tf_results
+          path: results.json
+      - name: Print the final result
+        if: always()
+        shell: bash
+        run: |
+          value=`cat results.json`
+          echo The result is $value
       - name: outputtest1
         if: always()
         run: |
