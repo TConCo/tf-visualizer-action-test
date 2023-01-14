@@ -15,7 +15,7 @@ jobs:
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
           working_directory: ''
-          tfsec_args: --soft-fail
+          tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
 #   create_issue:
 #     runs-on: ubuntu-latest
