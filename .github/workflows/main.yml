@@ -20,7 +20,7 @@ jobs:
           github_token: ${{ github.token }}
       - name: outputtest2
         if: always()
-        run: echo ${{join(steps.tfsec.outputs.*, '\n')}}
+        run: echo ${{join(steps.tfsec.outputs.results.json, '\n')}}
 #   create_issue:
 #     runs-on: ubuntu-latest
 #     permissions:
