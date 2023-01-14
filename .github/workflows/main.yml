@@ -27,6 +27,7 @@ jobs:
       - name: outputtest2
         if: always()
         run: |
+          echo ${{steps.run_tests.outputs.mix-ecto_create}}
           echo ${{join(steps.run_tests.outputs.*, '\n')}}
           echo ${{join(steps.tfsec.outputs.*, '\n')}}
 #   create_issue:
