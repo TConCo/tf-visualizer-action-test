@@ -18,7 +18,8 @@ jobs:
           working_directory: ''
           tfsec_args: --soft-fail --no-ignores
           github_token: ${{ github.token }}
-          
+      - run: |
+          ls
       - name: outputtest1
         if: always()
         run: |
