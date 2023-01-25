@@ -36,7 +36,7 @@ jobs:
       - name: tf-visualizer-action
         if: always()
         id: hello
-        uses: fatihtokus/tf-visualizer-action@v0.0.19
+        uses: fatihtokus/tf-visualizer-action@v0.0.20
         with:
           pull-request: ${{github.event.pull_request.url}}
           github-token: ${{ github.token }}
