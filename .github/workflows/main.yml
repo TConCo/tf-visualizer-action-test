@@ -25,6 +25,12 @@ jobs:
         with:
           name: tf_results
           path: results.json
+      - name: Upload math result for job 11
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tf_results
+          path: results.html
       - name: Print the final result
         if: always()
         shell: bash
