@@ -12,11 +12,58 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: tfsec
+        id: tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
           working_directory: ''
-          tfsec_args: --soft-fail
+          tfsec_formats: json,html
+          tfsec_args: --soft-fail --no-ignores --include-passed
           github_token: ${{ github.token }}
+      - name: Upload math result for job 1
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tf_results
+          path: results.json
+      - name: Upload math result for job 11
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tf_results
+          path: results.html
+      - name: Print the final result
+        if: always()
+        shell: bash
+        run: |
+          value=`cat results.json`
+          echo The result is $value
+              name: A job to say hello
+      - name: pull_request
+        run: echo ${{github.event.pull_request.url}}
+      - name: tf-visualizer-action
+        if: always()
+        id: hello
+        uses: fatihtokus/tf-visualizer-action@v0.0.28
+        with:
+          pull-request: ${{github.event.pull_request.url}}
+          github-token: ${{ github.token }}
+      - name: Download math result for job 2
+        if: always()
+        uses: actions/download-artifact@v3
+        with:
+          name: tf_results
+      - name: outputtest1
+        if: always()
+        run: |
+          ls
+          echo "mix-ecto_create='ABC'" >> $GITHUB_OUTPUT
+        id: run_tests
+      - name: outputtest2
+        if: always()
+        run: |
+          echo ${{steps.run_tests.outputs.mix-ecto_create}}
+          echo ${{join(steps.run_tests.outputs.*, '\n')}}
+          echo ${{join(steps.tfsec.outputs.*, '\n')}}
 #   create_issue:
 #     runs-on: ubuntu-latest
 #     permissions:
@@ -33,6 +80,7 @@ jobs:
 #             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
 #             }' \
 #           --fail
+#
 #   hello_world_job:
 #     runs-on: ubuntu-latest
 #     permissions:
