@@ -1,50 +1,28 @@
-name: tf-visualizer-action-test
+name: build
 on:
+  push:
+    branches:
+      - master
   pull_request:
 jobs:
-  tfsec:
-    name: tfsec PR commenter
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
     steps:
-      - name: Clone repo
-        uses: actions/checkout@master
-      - name: tfsec
-        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@master
         with:
-          working_directory: ''
-          tfsec_args: --soft-fail
-          github_token: ${{ github.token }}
-#   create_issue:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       issues: write 
-#     steps:
-#       - name: Create issue using REST API
-#         run: |
-#           curl --request POST \
-#           --url https://api.github.com/repos/${{ github.repository }}/issues \
-#           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-#           --header 'content-type: application/json' \
-#           --data '{
-#             "title": "Automated issue for commit: ${{ github.sha }}",
-#             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
-#             }' \
-#           --fail
-#   hello_world_job:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: read
-#       pull-requests: write
-#     name: A job to say hello
-#     steps:
-#       - name: pull_request
-#         run: echo ${{github.event.pull_request.url}}
-#       - name: Hello world action step
-#         id: hello
-#         uses: fatihtokus/tf-visualizer-action@v0.0.15
-#         with:
-#           pull-request: ${{github.event.pull_request.url}}
-#           github-token: ${{ github.token }}
+          scan-type: 'config'
+          hide-progress: false
+          format: 'json'
+          output: 'trivy.json'
+          exit-code: '1'
+          ignore-unfixed: true          
+      - name: Upload math result for job 1
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: results
+          path: trivy.json
